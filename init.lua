@@ -28,8 +28,7 @@ require("lazy").setup({
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
-    opts = {
-    }
+    event = "LspAttach"
   },
   {
     'nvim-lua/plenary.nvim'
@@ -191,7 +190,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>hm', require('harpoon.mark').add_file, { desc = '[H]arpoon [M]ark' })
 vim.keymap.set('n', '<leader>ht', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon [T]oggle' })
 vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]arpoon [N]ext' })
-vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]rev' })
+vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]revious' })
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'elixir', 'go', 'lua', 'python', 'rust', 'ruby', 'tsx', 'typescript', 'vimdoc',
@@ -294,7 +293,13 @@ end
 local servers = {
   rust_analyzer = {},
   solargraph = {},
-
+  gopls = {
+    analyses = {
+      unusedparams = true,
+    },
+    staticcheck = true,
+    gofumpt = true,
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
