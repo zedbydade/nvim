@@ -13,6 +13,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   'christoomey/vim-tmux-navigator',
+  {
+    "romgrk/barbar.nvim",
+    dependencies = {
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
+    }
+  },
   'xiyaowong/transparent.nvim',
   'tpope/vim-rails',
   'jiangmiao/auto-pairs',
@@ -102,9 +109,8 @@ require("lazy").setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    build = ':TSUpdate',
-  }, -- lazy = true,
+    }
+  },
 })
 
 -- keymap
@@ -116,6 +122,7 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.have_nerd_font = false
 keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 keymap("n", "q", "<cmd>q!<cr>", opts)
@@ -127,6 +134,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.showmode = false
 vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 vim.o.undofile = true
@@ -138,6 +146,13 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.inccommand = 'split'
 
 -- [[ Basic Keymaps ]]
 
@@ -169,6 +184,21 @@ vim.keymap.set('n', '<C-h>', ":TmuxNavigateLeft<CR>", { desc = 'window left' })
 vim.keymap.set('n', '<C-l>', ":TmuxNavigateLeft<CR>", { desc = 'window right' })
 vim.keymap.set('n', '<C-j>', ":TmuxNavigateLeft<CR>", { desc = 'window down' })
 vim.keymap.set('n', '<C-k>', ":TmuxNavigateLeft<CR>", { desc = 'window up' })
+vim.keymap.set('n', '<A-,>', '<Cmd>BufferPrevious<CR>', { silent = true })
+vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', { silent = true })
+vim.keymap.set('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', { silent = true })
+vim.keymap.set('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', { silent = true })
+vim.keymap.set('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', { silent = true })
+vim.keymap.set('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', { silent = true })
+vim.keymap.set('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', { silent = true })
+vim.keymap.set('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', { silent = true })
+vim.keymap.set('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', { silent = true })
+vim.keymap.set('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', { silent = true })
+vim.keymap.set('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', { silent = true })
+vim.keymap.set('n', '<A-0>', '<Cmd>BufferLast<CR>', { silent = true })
+vim.keymap.set('n', '<A-c>', '<Cmd>BufferClose<CR>', { silent = true })
+vim.keymap.set('n', '<C-o>', '<Cmd>BufferPick<CR>', { silent = true })
+
 
 pcall(require('telescope').load_extension, 'fzf')
 
